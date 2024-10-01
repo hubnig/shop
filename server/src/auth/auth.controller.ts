@@ -14,7 +14,7 @@ export class AuthController {
 	constructor(private readonly authService: AuthService) {}
 
 	/* Login, getNewTokens */
-	@UsePipes(new ValidationPipe())
+	@UsePipes(new ValidationPipe()) 
 	@HttpCode(200)
 	@Post('register')
 	async register(@Body() dto: AuthDto) {
