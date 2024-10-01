@@ -12,7 +12,7 @@ jobs:
           node-version: 'latest'
       - name: Install deps
         working-directory: ./server
-        run: npm ci
+        run: yarn
       - name: Lint
         working-directory: ./server
-        run: npm run lint
+        run: yarn lint
