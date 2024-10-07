@@ -1,1 +1,2 @@
 -prisma db push
+-@id:editor.bracketPairColorization.enabled @id:editor.guides.bracketPairs
