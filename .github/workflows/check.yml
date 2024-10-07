@@ -13,6 +13,6 @@ jobs:
       - name: Install deps
         working-directory: ./server
         run: yarn
-      - name: Lint
+      - name: Linting
         working-directory: ./server
         run: yarn lint
