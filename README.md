@@ -36,7 +36,7 @@ cd server
 #### 2.Установите зависимости:
 
 ```bash
-npm install
+yarn install
 ```
 
 #### 3. Настройте переменные окружения. Создайте файл .env в корне папки server и добавьте следующие строки:
@@ -55,7 +55,7 @@ npx prisma migrate dev --name init
 #### 5. Запустите сервер:
 
 ```bash
-npm run start:dev
+yarn run start:dev
 ```
 
 ### 3. Настройка Frontend
@@ -69,11 +69,11 @@ cd client
 #### 2. Установите зависимости:
 
 ```bash
-npm install
+yarn install
 ```
 
 #### 3. Запустите клиентское приложение:
 
 ```bash
-npm run dev
+yarn run dev
 ```
