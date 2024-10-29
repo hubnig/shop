@@ -1,2 +1,9 @@
 -prisma db push
 -@id:editor.bracketPairColorization.enabled @id:editor.guides.bracketPairs
+
+2.22.00
+
+
+Создать таблицу favorite 
+
+слаг для категорий

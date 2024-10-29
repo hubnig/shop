@@ -20,13 +20,15 @@ model User {
 
   email      String @unique
   password   String
-  name       String @unique
-  phone      String @default("")
+  FirstName  String @map("first_name")
+  LastName   String @map("last_name")
+  phone      String @unique @default("")
   avatarPath String @default("./uploads/default-avatar.png") @map("avatar_path")
 
   orders    Order[]
   reviews   Review[]
   favorites Product[]
+  cart      Cart[]
 }
 
 model Product {
@@ -39,15 +41,27 @@ model Product {
   description String
   price       Int
   images      String[]
+  //quantity
 
   orderItems OrderItem[]
   reviews    Review[]
+  cartItems  Cart[]
 
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId Int      @map("category_id")
+  User       User?    @relation(fields: [userId], references: [id])
+  userId     Int?
+}
 
-  user   User @relation(fields: [userId], references: [id])
-  userId Int
+model Cart {
+  userId    Int @map("user_id")
+  productId Int @map("product_id")
+  quantity  Int
+
+  user    User    @relation(fields: [userId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+
+  @@id([userId, productId])
 }
 
 model Category {
@@ -56,6 +70,7 @@ model Category {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   name String @unique
+  slug String @unique
 
   Product Product[]
 }
@@ -107,4 +122,6 @@ model OrderItem {
 
   product   Product @relation(fields: [productId], references: [id])
   productId Int     @map("product_id")
+
+  @@map("Order_item")
 }

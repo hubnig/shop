@@ -52,7 +52,8 @@ export class UserService {
 			},
 			data: {
 				email: dto.email,
-				name: dto.name,
+				FirstName: dto.FirstName,
+				LastName: dto.LastName,
 				phone: dto.phone,
 				avatarPath: dto.avatarPath,
 				password: dto.password ? await hash(dto.password) : user.password
