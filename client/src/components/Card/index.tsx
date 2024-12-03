@@ -1,13 +1,13 @@
 // app/components/CardProduct.tsx
 'use client'
 
-import { Product } from '@/types/product.interface'
+import { IProduct } from '@/types/product.interface'
 import { Badge, Button, Card, Center, Group, Image, Text } from '@mantine/core'
 import { IconGasStation, IconUsers } from '@tabler/icons-react'
 import classes from './Card.module.css'
 
 interface CardProduct {
-	product: Product
+	product: IProduct
 }
 
 const CardProduct = ({ product }: CardProduct) => {
@@ -26,7 +26,7 @@ const CardProduct = ({ product }: CardProduct) => {
 		<Card withBorder radius='md' className={classes.card}>
 			<Card.Section className={classes.imageSection}>
 				<Image
-					src='https://steamcdn-a.akamaihd.net/steam/apps/1601580/library_600x900.jpg'
+					src={product.images[0]}
 					alt={product.name}
 				/>
 			</Card.Section>
@@ -39,7 +39,6 @@ const CardProduct = ({ product }: CardProduct) => {
 					</Text>
 				</div>
 				<Badge variant='outline'>25% off</Badge>{' '}
-				{/* Замените на актуальную информацию */}
 			</Group>
 
 			<Card.Section className={classes.section} mt='md'>

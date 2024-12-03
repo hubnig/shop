@@ -1,36 +1,50 @@
-import axios from 'axios'
+import { instance } from '@/api/api.interceptor'
 import Cookies from 'js-cookie'
-
-import { getContentType } from '@/api/api.helper'
 import { saveToStorage } from '@/services/auth/auth.helper'
-import { IAuthResponse, IEmailPassword } from '@/store/user/user.interface'
+import { IAuthResponse, IEmailPassword } from '@/store/user/auth.interface'
 
 export const AuthService = {
-	async main(type: 'login' | 'register', data: IEmailPassword) {
-		const response = await axios<IAuthResponse>({
-			url: `/auth/${type}`,
-			method: 'POST',
-			data,
-		})
+	async main(
+		type: 'login' | 'register',
+		data: IEmailPassword
+	): Promise<IAuthResponse> {
+		try {
+			const response = await instance.post<IAuthResponse>(`/auth/${type}`, data)
 
-		if (response.data.accessToken) saveToStorage(response.data)
+			if (response.data.accessToken) {
+				saveToStorage(response.data)
+			}
 
-		return response.data
+			return response.data
+		} catch (error) {
+			console.error('Error during authentication:', error)
+			throw new Error('Authentication failed. Please try again.')
+		}
 	},
 
-	async getNewTokens() {
+	async getNewTokens(): Promise<IAuthResponse> {
 		const refreshToken = Cookies.get('refreshToken')
 
-		const response = await axios.post<string, { data: IAuthResponse }>(
-			process.env.SERVER_URL + '/login/access-token',
-			{ refreshToken },
-			{
-				headers: getContentType(),
-			},
-		)
+		if (!refreshToken) {
+			throw new Error('Refresh token not found')
+		}
 
-		if (response.data.accessToken) saveToStorage(response.data)
+		try {
+			const response = await instance.post<IAuthResponse>(
+				'/auth/login/access-token',
+				{
+					refreshToken
+				}
+			)
 
-		return response
-	},
+			if (response.data.accessToken) {
+				saveToStorage(response.data)
+			}
+
+			return response.data
+		} catch (error) {
+			console.error('Error while refreshing tokens:', error)
+			throw new Error('Failed to refresh tokens. Please log in again.')
+		}
+	}
 }

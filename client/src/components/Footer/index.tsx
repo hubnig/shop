@@ -1,12 +1,12 @@
 'use client'
 
-import { Text, Container, ActionIcon, Group, rem } from '@mantine/core'
+import { ActionIcon, Container, Group, rem, Text } from '@mantine/core'
+import { MantineLogo } from '@mantinex/mantine-logo'
 import {
+	IconBrandInstagram,
 	IconBrandTwitter,
 	IconBrandYoutube,
-	IconBrandInstagram,
 } from '@tabler/icons-react'
-import { MantineLogo } from '@mantinex/mantine-logo'
 import classes from './Footer.module.css'
 
 const data = [
@@ -55,8 +55,10 @@ export function Footer() {
 
 		return (
 			<div className={classes.wrapper} key={group.title}>
-				<Text className={classes.title}>{group.title}</Text>
-				{links}
+				<Text size='lg' fw={700} className={classes.title}>
+					{group.title}
+				</Text>
+				<Text fs={'italic'} size='sm' >{links}</Text>
 			</div>
 		)
 	})
@@ -74,7 +76,7 @@ export function Footer() {
 			</Container>
 			<Container className={classes.afterFooter}>
 				<Text c='dimmed' size='sm'>
-					© 2020 mantine.dev. All rights reserved.
+					© 2024 mantine.dev. All rights reserved.
 				</Text>
 
 				<Group

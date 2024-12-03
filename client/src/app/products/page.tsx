@@ -1,13 +1,14 @@
 'use client'
 
-import { Grid, Skeleton } from '@mantine/core'
 import { useEffect, useState } from 'react'
-import CardProduct from '../../components/Card/Card' // Убедитесь, что путь к компоненту CardProduct правильный
-import { Product } from '../../types/product.interface' // Импортируйте интерфейс Product
+import { Grid, Skeleton } from '@mantine/core'
+
+import CardProduct from '../../components/Card'
+import { IProduct } from '../../types/product.interface'
 
 const ProductList = () => {
-	const [products, setProducts] = useState<Product[]>([]) // Указываем тип состояния как массив Product
-	const [loading, setLoading] = useState<boolean>(true) // Состояние загрузки
+	const [products, setProducts] = useState<IProduct[]>([])
+	const [loading, setLoading] = useState<boolean>(true) 
 
 	useEffect(() => {
 		const fetchProducts = async () => {
@@ -15,16 +16,16 @@ const ProductList = () => {
 				const response = await fetch('http://localhost:3001/api/product', {
 					cache: 'force-cache',
 					next: { revalidate: 60 },
-				}) // Замените на ваш URL
+				}) 
 				if (!response.ok) {
 					throw new Error('Failed to fetch products')
 				}
 				const data = await response.json()
-				setProducts(data.products) // Убедитесь, что data.products соответствует типу Product[]
+				setProducts(data.products) 
 			} catch (error) {
 				console.error(error)
 			} finally {
-				setLoading(false) // Устанавливаем состояние загрузки в false после завершения запроса
+				setLoading(false) 
 			}
 		}
 

@@ -26,11 +26,13 @@ export class ProductDtoCreate implements Prisma.ProductCreateInput {
 	price: number;
 
 	@ArrayMinSize(1)
-	images?: string[];
+	images: string[];
 
 	@IsInt()
 	@IsNotEmpty()
 	categoryId: number; // Поле для идентификатора категории
+
+	category: Prisma.CategoryCreateNestedOneWithoutProductInput; // Добавлено поле category
 }
 
 export class ProductDtoUpdate implements Prisma.ProductUpdateInput {
@@ -73,4 +75,15 @@ export class GetAllProductsDto implements Prisma.ProductFindManyArgs {
 	@IsOptional()
 	@IsString()
 	searchTerm?: string;
+
+	@IsOptional()
+	@IsInt()
+	skip?: number; // Для пагинации
+
+	@IsOptional()
+	@IsInt()
+	take?: number; // Для ограничения количества возвращаемых записей
+
+	@IsOptional()
+	where?: Prisma.ProductWhereInput;
 }

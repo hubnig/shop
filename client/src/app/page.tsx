@@ -1,4 +1,4 @@
-import HeroBullets from '@/components/Hero/Hero'
+import HeroBullets from '@/components/Hero'
 
 const Home = () => {
 	return <HeroBullets />

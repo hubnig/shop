@@ -1,23 +1,23 @@
 import {
-	getTokensStorage,
-	removeTokensStorage,
+	getAccessTokenStorage,
+	removeTokensStorage
 } from '@/services/auth/auth.helper'
+import { AuthService } from '@/services/auth/auth.service'
 import axios from 'axios'
 import { errorCatch, getContentType } from './api.helper'
-import { AuthService } from '@/services/auth/auth.service'
 
 export const instance = axios.create({
 	baseURL: process.env.SERVER_URL,
-	headers: getContentType(),
+	headers: getContentType()
 })
 
 instance.interceptors.response.use(
 	config => config,
-	error => Promise.reject(error.response.data),
+	error => Promise.reject(error.response.data)
 )
 
 instance.interceptors.request.use(async config => {
-	const accessToken = getTokensStorage()
+	const accessToken = getAccessTokenStorage()
 
 	if (config.headers && accessToken)
 		config.headers.Authorization = `Bearer ${accessToken}`
@@ -39,7 +39,7 @@ instance.interceptors.response.use(
 		) {
 			originalRequest._isRetry = true
 			try {
-        await AuthService.getNewTokens()
+				await AuthService.getNewTokens()
 				return instance.request(originalRequest)
 			} catch (error) {
 				if (errorCatch(error) === 'jwt expired') {
@@ -49,5 +49,5 @@ instance.interceptors.response.use(
 
 			throw error
 		}
-	},
+	}
 )

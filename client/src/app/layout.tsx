@@ -1,20 +1,15 @@
-import { Footer } from '@/components/Footer/Footer'
-import { Header } from '@/components/Header/Header'
-import { ColorSchemeScript, MantineProvider } from '@mantine/core'
+import { Footer } from '@/components/Footer'
+import { Header } from '@/components/Header'
+import { ColorSchemeScript } from '@mantine/core'
 import '@mantine/core/styles.css'
 import type { Metadata } from 'next'
-import localFont from 'next/font/local'
+import { Poppins } from 'next/font/google'
 import './globals.css'
+import ProviderLayout from './providerLayout'
 
-const geistSans = localFont({
-	src: './fonts/GeistVF.woff',
-	variable: '--font-geist-sans',
-	weight: '100 900',
-})
-const geistMono = localFont({
-	src: './fonts/GeistMonoVF.woff',
-	variable: '--font-geist-mono',
-	weight: '100 900',
+const poppins = Poppins({
+	weight: ['400', '500', '700'],
+	subsets: ['latin'],
 })
 
 export const metadata: Metadata = {
@@ -32,15 +27,12 @@ export default function RootLayout({
 			<head>
 				<ColorSchemeScript />
 			</head>
-
-			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-			>
-				<MantineProvider>
+			<body className={poppins.className}>
+				<ProviderLayout>
 					<Header />
 					<main>{children}</main>
 					<Footer />
-				</MantineProvider>
+				</ProviderLayout>
 			</body>
 		</html>
 	)

@@ -11,7 +11,7 @@ export const ProductService = {
 	 * @param queryDto - DTO для фильтрации продуктов.
 	 * @returns {Promise<IProduct[]>} Список продуктов.
 	 */
-	async getAll(queryDto: any): Promise<IProduct[]> {
+	async getAll(queryDto: IProduct): Promise<IProduct[]> {
 		try {
 			const response = await instance.get<IProduct[]>('/product', {
 				params: queryDto,
@@ -75,7 +75,7 @@ export const ProductService = {
 	 * @param productDtoCreate - DTO для создания продукта.
 	 * @returns {Promise<IProduct | undefined>} Созданный продукт или undefined.
 	 */
-	async create(productDtoCreate: any): Promise<IProduct | undefined> {
+	async create(productDtoCreate: IProduct): Promise<IProduct | undefined> {
 		try {
 			const response = await instance.post<IProduct>(
 				'/product',
@@ -96,7 +96,7 @@ export const ProductService = {
 	 */
 	async update(
 		id: string,
-		productDtoUpdate: any,
+		productDtoUpdate: IProduct,
 	): Promise<IProduct | undefined> {
 		try {
 			const response = await instance.put<IProduct>(

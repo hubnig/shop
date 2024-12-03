@@ -21,10 +21,15 @@ const HeroBullets = () => {
 			<div className={classes.inner}>
 				<div className={classes.content}>
 					<Title className={classes.title}>
-						A <span className={classes.highlight}>modern</span> React <br />{' '}
+						A <span className={classes.highlight}>modern</span> React <br />
 						components library
 					</Title>
-					<Text c='dimmed' mt='md'>
+					<Text
+						c='dimmed'
+						mt='md'
+						variant='gradient'
+						gradient={{ from: 'blue', to: 'cyan', deg: 90 }}
+					>
 						Build fully functional accessible web applications faster than ever
 						– Mantine includes more than 120 customizable components and hooks
 						to cover you in any situation
@@ -74,8 +79,9 @@ const HeroBullets = () => {
 					</Group>
 				</div>
 				<Image
-					src='https://ui.mantine.dev/_next/static/media/image.9a65bd94.svg'
 					className={classes.image}
+					src='https://ui.mantine.dev/_next/static/media/image.9a65bd94.svg'
+					alt='Mantine logo'
 				/>
 			</div>
 		</Container>
