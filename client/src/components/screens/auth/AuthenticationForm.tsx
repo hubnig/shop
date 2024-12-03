@@ -1,7 +1,8 @@
-// app/components/AuthenticationForm.tsx
-
 'use client'
 
+import { useActions } from '@/hooks/useActions'
+import { useAuth } from '@/hooks/useAuth'
+import { useAuthRedirect } from '@/hooks/useAuthRedirect'
 import {
 	Anchor,
 	Button,
@@ -14,20 +15,17 @@ import {
 	Text,
 	TextInput
 } from '@mantine/core'
-import { useForm } from 'react-hook-form'
 import { upperFirst, useToggle } from '@mantine/hooks'
+import { KeySquare, Mail, User } from 'lucide-react'
+import { useForm } from 'react-hook-form'
 import { GoogleButton } from './GoogleButton'
 import { TwitterButton } from './TwitterButton'
-import { useAuth } from '@/hooks/useAuth'
-import { useActions } from '@/hooks/useActions'
-import { Mail, KeySquare, User } from 'lucide-react'
-import { useAuthRedirect } from '@/hooks/useAuthRedirect'
 
 interface FormValues {
 	email: string
-	name?: string // Имя может быть необязательным для входа
+	name?: string
 	password: string
-	terms?: boolean // Условия могут быть необязательными для входа
+	terms?: boolean
 }
 
 export function AuthenticationForm(props: any) {
@@ -40,12 +38,11 @@ export function AuthenticationForm(props: any) {
 	const {
 		register: formRegister,
 		handleSubmit,
-		formState: { errors },
+		formState: { errors }
 	} = useForm<FormValues>({
 		defaultValues: {
 			email: '',
-			password: '',
-
+			password: ''
 		}
 	})
 

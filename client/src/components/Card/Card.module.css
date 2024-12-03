@@ -1,9 +1,12 @@
 .card {
   background-color: var(--mantine-color-body);
   height: 100%;
+  width: 400px;
+  
 }
 
 .imageSection {
+  height: 100%;
   padding: var(--mantine-spacing-md);
   display: flex;
   align-items: center;
