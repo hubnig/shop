@@ -90,7 +90,8 @@ export class AuthService {
 	private returnUserFields(user: User) {
 		return {
 			id: user.id,
-			email: user.email
+			email: user.email,
+			avatar: user.avatarPath
 		};
 	}
 
