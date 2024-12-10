@@ -2,6 +2,7 @@
 
 import {
 	Anchor,
+	Avatar,
 	Box,
 	Burger,
 	Button,
@@ -32,6 +33,9 @@ import {
 } from '@tabler/icons-react'
 import Link from 'next/link'
 import classes from './Header.module.css'
+import { useAppDispatch, useAppSelector } from '@/hooks/useRedux'
+import { logout } from '@/store/user/user.actions'
+import { BookHeart } from 'lucide-react'
 
 const mockdata = [
 	{
@@ -71,6 +75,8 @@ export function Header() {
 		useDisclosure(false)
 	const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false)
 	const theme = useMantineTheme()
+	const dispatch = useAppDispatch()
+	const user = useAppSelector(state => state.user.user)
 
 	const links = mockdata.map(item => (
 		<UnstyledButton className={classes.subLink} key={item.title}>
@@ -163,14 +169,28 @@ export function Header() {
 						</a>
 					</Group>
 
-					<Group visibleFrom="sm">
-						<Link href="/auth?mode=login">
-							<Button variant="default">Log in</Button>
-						</Link>
-						<Link href="/auth?mode=register">
-							<Button>Sign up</Button>
-						</Link>
-					</Group>
+					{user ? (
+						<Group>
+							<Link href="/wishlist">
+								<Button variant="default">
+									<BookHeart />
+								</Button>
+							</Link>
+							<Button variant="default" onClick={() => dispatch(logout())}>
+								LogOut
+							</Button>
+							<Avatar color="initial" src={user.avatar} alt="avatar" />
+						</Group>
+					) : (
+						<Group visibleFrom="sm">
+							<Link href="/auth?mode=login">
+								<Button variant="default">Log in</Button>
+							</Link>
+							<Link href="/auth?mode=register">
+								<Button>Sign up</Button>
+							</Link>
+						</Group>
+					)}
 
 					<Burger
 						opened={drawerOpened}

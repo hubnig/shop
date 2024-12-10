@@ -1,6 +1,6 @@
 import { instance } from '@/api/api.interceptor'
-import { IUser } from '@/types/user.interface' // Импортируйте интерфейс пользователя
 import { IErrorResponse } from '@/types/error.interface'
+import { IUser } from '@/types/user.interface' // Импортируйте интерфейс пользователя
 
 export const UserService = {
 	// Кэш для хранения профиля пользователя
@@ -48,13 +48,22 @@ export const UserService = {
 		}
 	},
 
-	/**
-	 * Добавление или удаление товара из избранного
-	 * @param id - ID пользователя
-	 * @param productId - ID продукта
-	 * @returns {Promise<void>}
-	 */
-	async toggleFavorites(id: number, productId: number): Promise<void> {
+	// /**
+	//  * Добавление или удаление товара из избранного
+	//  * @param id - ID пользователя
+	//  * @param productId - ID продукта
+	//  * @returns {Promise<void>}
+	//  */
+	// async toggleFavorites(id: number, productId: number): Promise<void> {
+	// 	try {
+	// 		await instance.patch(`/users/profile/favorites/${productId}`)
+	// 		// Обновление кэша при изменении избранного (если необходимо)
+	// 	} catch (error) {
+	// 		this.handleError(error)
+	// 	}
+	// },
+
+	async toggleFavorites(productId: number): Promise<void> {
 		try {
 			await instance.patch(`/users/profile/favorites/${productId}`)
 			// Обновление кэша при изменении избранного (если необходимо)
@@ -85,5 +94,5 @@ export const UserService = {
 
 		console.error(message) // Логируем ошибку в консоль или можно использовать другой метод логирования.
 		throw new Error(message) // Бросаем ошибку дальше, чтобы её можно было обработать на уровне компонента.
-	},
+	}
 }

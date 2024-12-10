@@ -39,7 +39,6 @@ const ProductList = () => {
 				  Array.from({ length: 12 }).map((_, index) => (
 						<Grid.Col
 							style={{ flexBasis: 'auto' }}
-							span={{ base: 12, md: 6, lg: 3 }}
 							key={index}
 						>
 							<Skeleton height={768} animate={true} />
@@ -48,7 +47,6 @@ const ProductList = () => {
 				: products.map(product => (
 						<Grid.Col
 							style={{ flexBasis: 'auto' }}
-							span={{ base: 12, md: 6, lg: 3 }}
 							key={product.id}
 						>
 							<CardProduct product={product} />

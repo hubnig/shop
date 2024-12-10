@@ -4,6 +4,7 @@ import { errorCatch } from '@/api/api.helper'
 
 import { removeTokensStorage } from '@/services/auth/auth.helper'
 import { AuthService } from '@/services/auth/auth.service'
+import { UserService } from '@/services/user.service'
 import { IAuthResponse, IEmailPassword } from './auth.interface'
 
 // register
@@ -53,6 +54,18 @@ export const checkAuth = createAsyncThunk<IAuthResponse>(
 				thunkAPI.dispatch(logout())
 			}
 			return thunkAPI.rejectWithValue(errorCatch(error))
+		}
+	}
+)
+
+export const toggleFavorite = createAsyncThunk(
+	'user/toggleFavorite',
+	async (productId: number, thunkAPI) => {
+		try {
+			await UserService.toggleFavorites(productId) // Вызов метода для изменения избранного
+			return productId // Возвращаем ID продукта для обновления состояния, если нужно
+		} catch (error) {
+			return thunkAPI.rejectWithValue(errorCatch(error)) // Возвращаем сообщение об ошибке
 		}
 	}
 )

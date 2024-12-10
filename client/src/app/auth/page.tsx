@@ -1,22 +1,25 @@
+// app/auth/page.js
 'use client'
+
 import { AuthenticationForm } from '@/components/screens/auth/AuthenticationForm'
 import { Container } from '@mantine/core'
 import { useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 const AuthPage = () => {
-       const searchParams = useSearchParams()
-				const mode = searchParams.get('mode')
+	const searchParams = useSearchParams()
+	const myType = searchParams.get('mode') === 'register' ? 'register' : 'login'
+	const [formType, setFormType] = useState<'login' | 'register'>(myType)
 
-    return (
-        <div>
-            {mode === 'login' && <Container size="30rem">
-			<AuthenticationForm type="login" />
-		</Container>}
-            {mode === 'register' && <Container size="30rem">
-			<AuthenticationForm type="register" />
-		</Container>}
-        </div>
-    );
-};
+	useEffect(() => {
+		setFormType(myType)
+	}, [myType])
 
-export default AuthPage;
+	return (
+		<Container size="30rem">
+			<AuthenticationForm type={formType} setFormType={setFormType} />
+		</Container>
+	)
+}
+
+export default AuthPage

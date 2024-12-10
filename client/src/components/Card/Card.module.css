@@ -2,7 +2,7 @@
   background-color: var(--mantine-color-body);
   height: 100%;
   width: 400px;
-  
+  position: relative;
 }
 
 .imageSection {
@@ -31,4 +31,16 @@
 .icon {
   margin-right: rem(5px);
   color: light-dark(var(--mantine-color-gray-5), var(--mantine-color-dark-2));
+}
+
+.heart {
+	position: absolute; /* Позволяет разместить сердечко в углу */
+	top: 16px; /* Отступ сверху */
+	right: 16px; /* Отступ справа */
+	cursor: pointer; /* Указатель при наведении */
+	color: gray; /* Цвет по умолчанию */
+}
+
+.filled {
+	color: red; /* Цвет при нажатии */
 }

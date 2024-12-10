@@ -40,20 +40,36 @@ export const userSlice = createSlice({
 			})
 			.addCase(logout.fulfilled, state => {
 				state.isLoading = false
-        state.user = null
+				state.user = null
 			})
 			.addCase(logout.rejected, state => {
 				state.isLoading = false
 			})
-      .addCase(checkAuth.pending, state => {
-        state.isLoading = true
-      })
-      .addCase(checkAuth.fulfilled, (state, { payload }) => {
-        state.isLoading = false
-        state.user = payload.user
-      })
-      .addCase(checkAuth.rejected, state => {
-        state.isLoading = false
-      })
+			.addCase(checkAuth.pending, state => {
+				state.isLoading = true
+			})
+			.addCase(checkAuth.fulfilled, (state, { payload }) => {
+				state.isLoading = false
+				state.user = payload.user
+			})
+			.addCase(checkAuth.rejected, state => {
+				state.isLoading = false
+			})
+			// .addCase(toggleFavorite.fulfilled, (state, action) => {
+			// 	const productId = action.payload // Получаем ID продукта из действия
+
+			// 	if (state.user) {
+			// 		const isFavorite = state.user.favorites.includes(productId)
+			// 		if (isFavorite) {
+			// 			// Если продукт уже в избранном — удаляем его
+			// 			state.user.favorites = state.user.favorites.filter(
+			// 				id => id !== productId
+			// 			)
+			// 		} else {
+			// 			// Если продукта нет в избранном — добавляем его
+			// 			state.user.favorites.push(productId)
+			// 		}
+			// 	}
+			// })
 	}
 })

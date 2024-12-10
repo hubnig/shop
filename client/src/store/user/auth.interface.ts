@@ -3,6 +3,7 @@ import { IUser } from '../../types/user.interface'
 export interface IUserState {
   email: string
   isAdmin: boolean
+  avatar: string
 }
 
 export interface ITokens {
@@ -23,5 +24,6 @@ export interface IEmailPassword {
 export interface IAuthResponse extends ITokens {
   user: IUser & {
     isAdmin: boolean
+    avatar: string
   }
 }

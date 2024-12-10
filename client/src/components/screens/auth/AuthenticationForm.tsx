@@ -1,39 +1,45 @@
+// app/components/screens/auth/AuthenticationForm.tsx
 'use client'
 
 import { useActions } from '@/hooks/useActions'
 import { useAuth } from '@/hooks/useAuth'
-import { useAuthRedirect } from '@/hooks/useAuthRedirect'
 import {
 	Anchor,
 	Button,
+	Center,
 	Checkbox,
 	Divider,
 	Group,
+	Loader,
 	Paper,
 	PasswordInput,
 	Stack,
 	Text,
 	TextInput
 } from '@mantine/core'
-import { upperFirst, useToggle } from '@mantine/hooks'
+import { upperFirst } from '@mantine/hooks'
 import { KeySquare, Mail, User } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { GoogleButton } from './GoogleButton'
 import { TwitterButton } from './TwitterButton'
+import { useAuthRedirect } from '@/hooks/useAuthRedirect'
 
 interface FormValues {
 	email: string
-	name?: string
+	name: string
 	password: string
-	terms?: boolean
+	terms: boolean
 }
 
-export function AuthenticationForm(props: any) {
-	useAuthRedirect()
+interface IProps {
+	type: 'login' | 'register'
+	setFormType: (type: 'login' | 'register') => void // Функция для изменения типа формы
+}
+
+export function AuthenticationForm({ type, setFormType }: IProps) {
 	const { isLoading } = useAuth()
 	const { login, register } = useActions()
-
-	const [type, toggle] = useToggle(['login', 'register'])
+	useAuthRedirect()
 
 	const {
 		register: formRegister,
@@ -48,14 +54,19 @@ export function AuthenticationForm(props: any) {
 
 	const onSubmit = (data: FormValues) => {
 		if (type === 'login') {
-			login(data) // Логика для входа
+			login(data)
 		} else {
-			register(data) // Логика для регистрации
+			register(data)
 		}
+
 	}
 
-	return (
-		<Paper radius="md" p="xl" withBorder {...props}>
+	return isLoading ? (
+		<Center h={410}>
+			<Loader />
+		</Center>
+	) : (
+		<Paper radius="md" p="xl" withBorder>
 			<Text size="lg" fw={500}>
 				Welcome to Mantine, {type} with
 			</Text>
@@ -75,7 +86,7 @@ export function AuthenticationForm(props: any) {
 							leftSectionPointerEvents="none"
 							leftSection={<User />}
 							placeholder="Your name"
-							{...formRegister('name')}
+							{...formRegister('name', { required: 'Name is required' })}
 							error={errors.name && 'Name is required'}
 							radius="md"
 						/>
@@ -129,7 +140,7 @@ export function AuthenticationForm(props: any) {
 						component="button"
 						type="button"
 						c="dimmed"
-						onClick={() => toggle()}
+						onClick={() => setFormType(type === 'login' ? 'register' : 'login')}
 						size="xs"
 					>
 						{type === 'register'
