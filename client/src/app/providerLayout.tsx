@@ -29,7 +29,7 @@ const ProviderLayout: React.FC<ProviderLayoutProps> = ({
 			<Provider store={store}>
 				<PersistGate loading={null} persistor={persistor}>
 					<AuthProvider Component={{ isOnlyUser }}>
-						<MantineProvider>{children}</MantineProvider>
+						<MantineProvider defaultColorScheme='dark'>{children}</MantineProvider>
 					</AuthProvider>
 				</PersistGate>
 			</Provider>

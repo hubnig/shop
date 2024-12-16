@@ -1,7 +1,7 @@
+import { getLocalStorage } from '@/utils/local-storage'
 import { createSlice } from '@reduxjs/toolkit'
 import { IInitialState } from './auth.interface'
 import { checkAuth, login, logout, register } from './user.actions'
-import { getLocalStorage } from '@/utils/local-storage'
 
 const initialState: IInitialState = {
 	user: getLocalStorage('user'),
@@ -55,21 +55,5 @@ export const userSlice = createSlice({
 			.addCase(checkAuth.rejected, state => {
 				state.isLoading = false
 			})
-			// .addCase(toggleFavorite.fulfilled, (state, action) => {
-			// 	const productId = action.payload // Получаем ID продукта из действия
-
-			// 	if (state.user) {
-			// 		const isFavorite = state.user.favorites.includes(productId)
-			// 		if (isFavorite) {
-			// 			// Если продукт уже в избранном — удаляем его
-			// 			state.user.favorites = state.user.favorites.filter(
-			// 				id => id !== productId
-			// 			)
-			// 		} else {
-			// 			// Если продукта нет в избранном — добавляем его
-			// 			state.user.favorites.push(productId)
-			// 		}
-			// 	}
-			// })
 	}
 })

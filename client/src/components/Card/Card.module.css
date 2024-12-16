@@ -1,46 +1,51 @@
 .card {
-  background-color: var(--mantine-color-body);
-  height: 100%;
-  width: 400px;
-  position: relative;
+	background-color: var(--mantine-color-body);
+	height: 100%;
+	width: 400px;
+	position: relative;
 }
 
 .imageSection {
-  height: 100%;
-  padding: var(--mantine-spacing-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+	height: 100%;
+	padding: var(--mantine-spacing-md);
+	padding-top: 0px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-bottom: rem(1px) solid
+		light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
 }
 
 .label {
-  margin-bottom: var(--mantine-spacing-xs);
-  line-height: 1;
-  font-weight: 700;
-  font-size: var(--mantine-font-size-xs);
-  letter-spacing: rem(-0.25px);
-  text-transform: uppercase;
+	margin-bottom: var(--mantine-spacing-xs);
+	line-height: 1;
+	font-weight: 700;
+	font-size: var(--mantine-font-size-xs);
+	letter-spacing: rem(-0.25px);
+	text-transform: uppercase;
 }
 
 .section {
-  padding: var(--mantine-spacing-md);
-  border-top: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+	padding: var(--mantine-spacing-md);
+	border-top: rem(1px) solid
+		light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
 }
 
 .icon {
-  margin-right: rem(5px);
-  color: light-dark(var(--mantine-color-gray-5), var(--mantine-color-dark-2));
+	margin-right: rem(5px);
+	color: light-dark(var(--mantine-color-gray-5), var(--mantine-color-dark-2));
 }
 
 .heart {
 	position: absolute; /* Позволяет разместить сердечко в углу */
-	top: 16px; /* Отступ сверху */
-	right: 16px; /* Отступ справа */
+	top: 24px; /* Отступ сверху */
+	right: 24px; /* Отступ справа */
 	cursor: pointer; /* Указатель при наведении */
 	color: gray; /* Цвет по умолчанию */
+
 }
 
-.filled {
-	color: red; /* Цвет при нажатии */
+.image {
+	border-radius: 10px;
+	padding: 0px;
 }

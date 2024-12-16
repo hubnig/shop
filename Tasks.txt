@@ -1,7 +1,7 @@
 -prisma db push
 -@id:editor.bracketPairColorization.enabled @id:editor.guides.bracketPairs
 
-2.22.00
+4.59.43
 
 
 Создать таблицу favorite 

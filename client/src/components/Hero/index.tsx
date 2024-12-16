@@ -36,6 +36,7 @@ const HeroBullets = () => {
 					</Text>
 
 					<List
+					className={classes.list}
 						mt={30}
 						spacing='sm'
 						size='sm'

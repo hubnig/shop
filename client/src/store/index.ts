@@ -15,16 +15,17 @@ import storage from 'redux-persist/lib/storage'
 // import { carouselSlice } from './slices/carouselSlice'
 // import { cartSlice } from './slices/cartSlice'
 import { userSlice } from './user/user.slice'
+import { cartSlice } from './cart/cart.slice'
 
 const persistConfig = {
 	key: 'game-shop',
 	storage,
-	whitelist: ['user'],
+	whitelist: ['user', 'cart'],
 }
 
 const rootReducer = combineReducers({
 	// carousel: carouselSlice.reducer,
-	// cart: cartSlice.reducer,
+	cart: cartSlice.reducer,
 	user: userSlice.reducer
 })
 

@@ -1,6 +1,6 @@
 import { instance } from '@/api/api.interceptor'
 import { IErrorResponse } from '@/types/error.interface'
-import { IUser } from '@/types/user.interface' // Импортируйте интерфейс пользователя
+import { IFullUser, IUser } from '@/types/user.interface' // Импортируйте интерфейс пользователя
 
 export const UserService = {
 	// Кэш для хранения профиля пользователя
@@ -18,7 +18,7 @@ export const UserService = {
 				return this.cache.get(id)!
 			}
 
-			const response = await instance.get<IUser>(`/users/profile`)
+			const response = await instance.get<IFullUser>(`/users/profile`)
 			const data = response.data // Извлечение данных из ответа
 
 			// Сохранение в кэш

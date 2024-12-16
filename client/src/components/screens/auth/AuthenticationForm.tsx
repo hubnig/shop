@@ -1,8 +1,8 @@
-// app/components/screens/auth/AuthenticationForm.tsx
 'use client'
 
 import { useActions } from '@/hooks/useActions'
 import { useAuth } from '@/hooks/useAuth'
+import { useAuthRedirect } from '@/hooks/useAuthRedirect'
 import {
 	Anchor,
 	Button,
@@ -22,7 +22,6 @@ import { KeySquare, Mail, User } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { GoogleButton } from './GoogleButton'
 import { TwitterButton } from './TwitterButton'
-import { useAuthRedirect } from '@/hooks/useAuthRedirect'
 
 interface FormValues {
 	email: string
@@ -58,7 +57,6 @@ export function AuthenticationForm({ type, setFormType }: IProps) {
 		} else {
 			register(data)
 		}
-
 	}
 
 	return isLoading ? (
